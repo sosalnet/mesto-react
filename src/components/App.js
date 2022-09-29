@@ -1,3 +1,4 @@
+import '../index.css'
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -9,6 +10,7 @@ function App() {
     const[isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
     const[isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
     const[isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+    const[selectedCard, setSelectedCard] = useState('');
 
     function handleEditProfileClick(){
         setIsEditProfilePopupOpen(true);
@@ -22,6 +24,10 @@ function App() {
         setIsEditAvatarPopupOpen(true);
     }
 
+    function handleCardClick(card){
+        setSelectedCard(card)
+    }
+
     function closeAllPopup(){
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
@@ -33,7 +39,8 @@ function App() {
     <Header/>
     <Main onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
-        onEditAvatar={handleEditAvatarClick}/>
+        onEditAvatar={handleEditAvatarClick}
+        onCardClick={handleCardClick}/>
     <Footer/>
 
     <PopupWithForm title='Редактировать профиль' name='edit' isOpen={isEditProfilePopupOpen} onClose={closeAllPopup}>
@@ -72,20 +79,6 @@ function App() {
             </form>
         </div>
     </div>
-
-    <template className="template__element">
-    <div className="element">
-        <button className="element__delete-button"></button>
-        <img className="element__image " src="#" alt=""/>
-        <div className="element__info ">
-            <h2 className="element__title "></h2>
-            <div className="element__likes">
-            <button className="element__like-button" type="button"></button>
-            <p className="element__like-counter"></p>
-            </div>
-        </div>
-    </div>
-    </template>
     </div>
   );
 }
