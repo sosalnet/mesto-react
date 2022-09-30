@@ -63,8 +63,7 @@ function App() {
         <span className="popup__error urll-error"></span>
     </PopupWithForm>
 
-    <ImagePopup card={selectedCard} onClose={closeAllPopup}>
-    </ImagePopup>
+    <ImagePopup card={selectedCard} onClose={closeAllPopup}/>
 
     <div className="popup popup_delete">
         <div className="popup__content">
