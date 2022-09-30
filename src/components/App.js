@@ -1,9 +1,9 @@
-import '../index.css'
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import {useState} from 'react';
+import ImagePopup from './ImagePopup';
 
 function App() {
     
@@ -32,6 +32,7 @@ function App() {
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
+        setSelectedCard('')
     }
 
   return (
@@ -62,13 +63,8 @@ function App() {
         <span className="popup__error urll-error"></span>
     </PopupWithForm>
 
-    <div className="popup popup_photo ">
-        <div className="popup__case">
-            <button className="popup__close-button popup__close-button-photo" type="button"></button>
-            <img className="popup__image" src="#" alt=""/>
-            <p className="popup__description"></p>
-        </div>
-    </div>
+    <ImagePopup card={selectedCard} onClose={closeAllPopup}>
+    </ImagePopup>
 
     <div className="popup popup_delete">
         <div className="popup__content">
