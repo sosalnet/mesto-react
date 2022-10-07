@@ -2,8 +2,10 @@ import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import ImagePopup from './ImagePopup';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import api from '../utils/Api.js'
 
 function App() {
     
@@ -11,6 +13,7 @@ function App() {
     const[isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
     const[isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
     const[selectedCard, setSelectedCard] = useState({});
+    const[currentUser, setCurrentUser] = useState({});
 
     function handleEditProfileClick(){
         setIsEditProfilePopupOpen(true);
@@ -35,8 +38,19 @@ function App() {
         setSelectedCard({})
     }
 
+    useEffect(()=>{
+        api.getUserInfo()
+        .then((e) => {
+            setCurrentUser(e);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, []);
+
   return (
     <div className="app">
+    <CurrentUserContext.Provider value={currentUser}>
     <Header/>
     <Main onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
@@ -74,6 +88,7 @@ function App() {
             </form>
         </div>
     </div>
+    </CurrentUserContext.Provider>
     </div>
   );
 }
