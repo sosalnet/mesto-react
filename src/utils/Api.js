@@ -51,17 +51,9 @@ class Api {
             .then(this._check)
     }
 
-    like(id) {
+    changeLikeCardStatus(id, isLiked) {
         return fetch(`https://mesto.nomoreparties.co/v1/cohort-48/cards/likes/${id}`, {
-                method: 'PUT',
-                headers: this._headers
-            })
-            .then(this._check);
-    }
-
-    dislike(id) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-48/cards/likes/${id}`, {
-                method: 'DELETE',
+                method: isLiked ? 'PUT' : 'DELETE',
                 headers: this._headers
             })
             .then(this._check);
