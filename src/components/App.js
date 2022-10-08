@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import api from '../utils/Api.js'
 import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js';
 
 function App() {
     
@@ -39,6 +40,17 @@ function App() {
         setSelectedCard({})
     }
 
+    function handleUpdateAvatar(e){
+        api.addNewAvatar(e)
+            .then((res) => {
+                setCurrentUser(res);
+                closeAllPopup();
+            })
+            .catch((res) => {
+                console.log(res);
+            })
+    }
+
     function handleUpdateUser(e){
         api.setUserInfo(e.name, e.about)
             .then((res) => {
@@ -48,8 +60,8 @@ function App() {
             .catch((res) => {
                 console.log(res);
             })
-            }
-            
+    }
+
     useEffect(()=>{
         api.getUserInfo()
         .then((e) => {
@@ -72,16 +84,13 @@ function App() {
 
     <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopup} onUpdateUser={handleUpdateUser}/>
 
+    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopup} onUpdateAvatar={handleUpdateAvatar}/>
+
     <PopupWithForm title='Новое место' name='add' textButton="Сохранить" isOpen={isAddPlacePopupOpen} onClose={closeAllPopup}>
         <input className="popup__input popup__input_title" placeholder="Название " name="name" id="title" type="text" minLength="2" maxLength="30" required/>
         <span className="popup__error title-error"></span>
         <input className="popup__input popup__input_url" placeholder="Ссылка на картинку " name="link" id="url" type="url" required/>
         <span className="popup__error url-error"></span>
-    </PopupWithForm>
-        
-    <PopupWithForm title='Обновить аватар' name='avatar' textButton="Сохранить" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopup}>
-        <input className="popup__input popup__input_url" name="link" id="urll" placeholder="Ссылка на картинку" type="url" required/>
-        <span className="popup__error urll-error"></span>
     </PopupWithForm>
 
     <ImagePopup card={selectedCard} onClose={closeAllPopup}/>
