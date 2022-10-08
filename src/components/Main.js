@@ -16,6 +16,13 @@ function Main(props){
         });
     } 
 
+    function handleCardDelete(card){
+        api.deleteCard(card._id)
+            .then(() => {
+                setCards((state) => state.filter((c) => c._id !== card._id));
+            })
+    }
+
     useEffect(()=>{
         api.getCards()
         .then((res) => {
@@ -43,7 +50,7 @@ function Main(props){
         </section>
         <section className="elements">
             {cards.map((card) => 
-                <Card key={card._id} card={card} onCardClick={props.onCardClick} onCardLike={handleCardLike}/>
+                <Card key={card._id} card={card} onCardClick={props.onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
             )}
         </section>
     </main>

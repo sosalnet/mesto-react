@@ -79,15 +79,9 @@ function App() {
 
     <ImagePopup card={selectedCard} onClose={closeAllPopup}/>
 
-    <div className="popup popup_delete">
-        <div className="popup__content">
-            <button className="popup__close-button popup__close-button-delete" type="button"></button>
-            <h2 className="popup__title">Вы уверены?</h2>
-            <form className="popup__info popup__form popup__form-delete" noValidate>
-                <button className="popup__button" type="submit">Да</button>
-            </form>
-        </div>
-    </div>
+    <PopupWithForm name='delete' title='Вы уверены?'  textButton='Да'/>
+
+    
     </CurrentUserContext.Provider>
     </div>
   );
