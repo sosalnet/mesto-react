@@ -37,5 +37,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://github.com/sosalnet/mesto-react/"
+  "homepage": "https://sosalnet.github.io/mesto-react/",
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
 }
